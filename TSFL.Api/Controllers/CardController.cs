@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TSFL.Application.Abstractions;
 using TSFL.Application.IRepository.ICardGroupCardsRepository;
 using TSFL.Application.IRepository.ICardRepository;
+using TSFL.Domain.Entities;
 
 namespace TSFL.Api.Controllers
 {
@@ -22,16 +23,22 @@ namespace TSFL.Api.Controllers
             _cardWriteRepository = cardWriteRepository;
         }
 
+
+
         [HttpGet]
-        public async Task GetAllCard()
+        public async Task<IActionResult> GetAllCard()
         {
 
-            await _cardWriteRepository.AddRangeAsync(new()
+            var cards = _cardReadRepository.GetAll(false);
+            if (cards != null)
             {
-                new() { Id=Guid.NewGuid(), Name="love" },
-                new() { Id=Guid.NewGuid(), Name="Name" },
-            });
-           var count = await _cardWriteRepository.SaveAsync();
+                return Ok(cards);
+            }
+            else
+            {
+                return NotFound();
+            }
+
         }
 
         [HttpGet("{id}")]
@@ -39,6 +46,12 @@ namespace TSFL.Api.Controllers
         {
             var card = await _cardReadRepository.GetByIdAsync(id);
             return (card == null) ?  NotFound() : Ok(card);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCards(Card card)
+        {
+            return Ok();
         }
     }
 }

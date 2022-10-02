@@ -20,9 +20,9 @@ namespace TSFL.Persistance.Repository.GennericRepository
             _context = context;
         }
 
-        public IQueryable<T> GetAll(bool tracking = true)
+        public  IQueryable<T> GetAll(bool tracking = true)
         {
-            var query = Table.AsQueryable();
+            var query =  Table.AsQueryable();
             if (!tracking)
             {
                 query = query.AsNoTracking();
