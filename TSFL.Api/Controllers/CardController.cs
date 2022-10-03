@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using TSFL.Application.Abstractions;
-using TSFL.Application.IRepository.ICardGroupCardsRepository;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using TSFL.Application.IRepository.ICardRepository;
+using TSFL.Application.ViewModels.CardModel;
 using TSFL.Domain.Entities;
 
 namespace TSFL.Api.Controllers
@@ -44,13 +43,36 @@ namespace TSFL.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCardById([FromRoute] Guid id)
         {
-            var card = await _cardReadRepository.GetByIdAsync(id);
+            var card = await _cardReadRepository.GetByIdAsync(id, false);
             return (card == null) ?  NotFound() : Ok(card);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCards(Card card)
+        public async Task<IActionResult> AddCards(VM_Create_Card vM_Create_Card)
         {
+           await _cardWriteRepository.AddAsync(new Card()
+            {
+                Name = vM_Create_Card.Name,
+
+            });
+            await _cardWriteRepository.SaveAsync();
+            return StatusCode((int)HttpStatusCode.Created);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateCard(VM_Update_Card vM_Update_Card)
+        {
+            Card card = await _cardReadRepository.GetByIdAsync(vM_Update_Card.Id);
+            card.Name = vM_Update_Card.Name;
+            await _cardWriteRepository.SaveAsync();
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCard(Guid id)
+        {
+            await _cardWriteRepository.RemoveAsync(id);
+            await _cardWriteRepository.SaveAsync();
             return Ok();
         }
     }
