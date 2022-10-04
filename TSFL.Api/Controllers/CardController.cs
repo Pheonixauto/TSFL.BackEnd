@@ -22,8 +22,6 @@ namespace TSFL.Api.Controllers
             _cardWriteRepository = cardWriteRepository;
         }
 
-
-
         [HttpGet]
         public async Task<IActionResult> GetAllCard()
         {
@@ -37,7 +35,6 @@ namespace TSFL.Api.Controllers
             {
                 return NotFound();
             }
-
         }
 
         [HttpGet("{id}")]
@@ -68,12 +65,12 @@ namespace TSFL.Api.Controllers
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCard(Guid id)
         {
-            await _cardWriteRepository.RemoveAsync(id);
+            var resultCheck = await _cardWriteRepository.RemoveAsync(id);
             await _cardWriteRepository.SaveAsync();
-            return Ok();
+            return Ok(resultCheck);
         }
     }
 }

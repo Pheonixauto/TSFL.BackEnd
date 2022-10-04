@@ -42,7 +42,14 @@ namespace TSFL.Persistance.Repository.GennericRepository
         public async Task<bool> RemoveAsync(Guid id)
         {
             T model = await Table.FindAsync(id);
-            return Remove(model);
+            if (model == null)
+            {
+                return false;
+            }
+            else
+            {
+                return Remove(model);
+            }
         }
 
         public bool RemoveRange(List<T> model)
