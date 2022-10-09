@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TSFL.Application\TSFL.Application.csproj" />
+    <ProjectReference Include="..\TSFL.Infrastructure\TSFL.Infrastructure.csproj" />
     <ProjectReference Include="..\TSFL.Persistance\TSFL.Persistance.csproj" />
   </ItemGroup>
 

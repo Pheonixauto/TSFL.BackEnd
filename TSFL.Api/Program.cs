@@ -1,3 +1,6 @@
+using FluentValidation.AspNetCore;
+using TSFL.Application.Validators.Cards;
+using TSFL.Infrastructure.Filters;
 using TSFL.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +27,10 @@ builder.Services.IAddServicePersistance(configurationManager);
 //builder.Services.AddServicePersistance();
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(option=>option.Filters.Add<ValidationFilter>())
+    .AddFluentValidation(config=>config.RegisterValidatorsFromAssemblyContaining<CreateCardValidator>())
+    .ConfigureApiBehaviorOptions(option=>option.SuppressModelStateInvalidFilter=true);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

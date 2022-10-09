@@ -47,6 +47,10 @@ namespace TSFL.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCards(VM_Create_Card vM_Create_Card)
         {
+            if (ModelState.IsValid)
+            {
+
+            }
            await _cardWriteRepository.AddAsync(new Card()
             {
                 Name = vM_Create_Card.Name,
