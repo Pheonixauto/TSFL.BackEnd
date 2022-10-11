@@ -29,7 +29,14 @@ namespace TSFL.Api.Controllers
             var cards = _cardReadRepository.GetAll(false);
             if (cards != null)
             {
-                return Ok(cards);
+                return Ok(cards.Select(p =>
+               new {
+                    p.Id,
+                    p.Name,
+                    p.CreatedDate,
+                    p.UpdatedDate,
+                    p.CardGroupCard,
+                }));
             }
             else
             {
