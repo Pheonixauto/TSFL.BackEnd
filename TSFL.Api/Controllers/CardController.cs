@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using TSFL.Application.IRepository.ICardRepository;
+using TSFL.Application.RequestParameters;
 using TSFL.Application.ViewModels.CardModel;
 using TSFL.Domain.Entities;
 
@@ -23,20 +24,25 @@ namespace TSFL.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllCard()
+        public async Task<IActionResult> GetAllCard([FromQuery]Pagination pagination)
         {
-
-            var cards = _cardReadRepository.GetAll(false);
+            var count = _cardReadRepository.GetAll(false).Count();
+            var cards = _cardReadRepository.GetAll(false).Skip(pagination.Page * pagination.Size).Take(pagination.Size).Select(p => new {
+                p.Id,
+                p.Name,
+                p.CreatedDate,
+                p.UpdatedDate,
+                p.CardGroupCard,
+            }).ToList();
             if (cards != null)
             {
-                return Ok(cards.Select(p =>
-               new {
-                    p.Id,
-                    p.Name,
-                    p.CreatedDate,
-                    p.UpdatedDate,
-                    p.CardGroupCard,
-                }));
+                return Ok(
+                    new
+                    {
+                        cards,
+                        count
+                    }
+                    );
             }
             else
             {
