@@ -24,4 +24,8 @@
     <ProjectReference Include="..\TSFL.Persistance\TSFL.Persistance.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\" />
+  </ItemGroup>
+
 </Project>

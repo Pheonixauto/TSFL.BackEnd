@@ -10,6 +10,7 @@ namespace TSFL.Domain.Entities
     public class Card : BaseEntity
     {
         public string? Name { get; set; }
+        public string ImageUrl { get; set; } = string.Empty;
         public IList<CardGroupCards> CardGroupCard { get; set; }
     }
 }
