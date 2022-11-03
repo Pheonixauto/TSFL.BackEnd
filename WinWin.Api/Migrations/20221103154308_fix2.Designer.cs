@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WinWin.Api.Data;
 
@@ -11,9 +12,10 @@ using WinWin.Api.Data;
 namespace WinWin.Api.Migrations
 {
     [DbContext(typeof(WinWinContext))]
-    partial class WinWinContextModelSnapshot : ModelSnapshot
+    [Migration("20221103154308_fix2")]
+    partial class fix2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

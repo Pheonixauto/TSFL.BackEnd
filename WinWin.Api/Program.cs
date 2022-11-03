@@ -57,6 +57,7 @@ AddJwtBearer(options =>
 
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -64,9 +65,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 
+app.UseCors();
+
+app.UseRouting();
+
 app.UseAuthorization();
+
+app.UseEndpoints(enpoint => enpoint.MapControllers());
 
 app.MapControllers();
 

@@ -33,7 +33,6 @@ namespace WinWin.Api.Controllers
             }
             catch (Exception)
             {
-
                 return BadRequest();
             }
 
