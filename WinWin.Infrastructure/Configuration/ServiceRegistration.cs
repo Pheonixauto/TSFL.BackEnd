@@ -6,8 +6,11 @@ using WinWin.Persistence.GenericDapperRepositories;
 using WinWin.Persistence.GenericRepositories;
 using WinWin.Persistence.IGenericDapperRepositories;
 using WinWin.Persistence.IGenericRepositories;
+using WinWin.Service.AutoMapperProfiles;
+using WinWin.Service.IService.ICardServices;
+using WinWin.Service.IService.IContentCardServices;
 using WinWin.Service.Service.CardServices;
-using WinWin.Service.Service.ICardServices;
+using WinWin.Service.Service.ContentCardServices;
 
 namespace WinWin.Infrastructure.Configuration
 {
@@ -17,6 +20,8 @@ namespace WinWin.Infrastructure.Configuration
         {
             services.AddDbContext<WinWinDBContext>(option => option.UseSqlServer(configuration.GetConnectionString("WinWinConnectionString"),
                         b => b.MigrationsAssembly(typeof(WinWinDBContext).Assembly.FullName)), ServiceLifetime.Transient);
+
+            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
             return services;
         }
 
@@ -24,8 +29,9 @@ namespace WinWin.Infrastructure.Configuration
         {
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IGenericDapperRepository, GenericDapperRepository>();
-            services.AddScoped<ICardService, CardService>();
 
+            services.AddScoped<ICardService, CardService>();
+            services.AddScoped<IContentCardService, ContentCardService>();
 
             return services;
         }

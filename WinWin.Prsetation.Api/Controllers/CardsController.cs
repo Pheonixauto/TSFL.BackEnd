@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WinWin.Domain.Entities.Card;
-using WinWin.Service.Service.ICardServices;
+using WinWin.Service.IService.ICardServices;
 
 namespace WinWin.Prsetation.Api.Controllers
 {
@@ -23,6 +23,14 @@ namespace WinWin.Prsetation.Api.Controllers
             return Ok(cards);
         }
 
+        [HttpGet]
+        [Route("get-card-by-id")]
+        public async Task<IActionResult> GetCardById(Guid id)
+        {
+            var result = await _cardService.GetCardById(id);
+            return Ok(result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddCard([FromBody] Cards cards)
         {
@@ -33,9 +41,25 @@ namespace WinWin.Prsetation.Api.Controllers
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut]
+        public IActionResult UpdateCard([FromBody] Cards cards)
+        {
+            try
+            {
+                _cardService.UpdateCard(cards);
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+       
+        }
+
     }
 }

@@ -25,7 +25,7 @@ namespace WinWin.Persistence.GenericRepositories
             return await _winWinDBContext.Set<T>().ToListAsync();
         }
 
-        public async Task<T> GetById(object id)
+        public async Task<T?> GetById(Guid id)
         {
             return await _winWinDBContext.Set<T>().FindAsync(id);
         }
@@ -37,7 +37,7 @@ namespace WinWin.Persistence.GenericRepositories
         public void Delete(T entity)
         {
             EntityEntry entityEntry = _winWinDBContext.Entry<T>(entity);
-            entityEntry.State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            entityEntry.State = EntityState.Deleted;
         }
 
         public void DeleteByExpression(Expression<Func<T, bool>> expression)
@@ -63,12 +63,16 @@ namespace WinWin.Persistence.GenericRepositories
         public void Update(T entity)
         {
             EntityEntry entityEntry = _winWinDBContext.Entry<T>(entity);
-            entityEntry.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            entityEntry.State = EntityState.Modified;
         }
         public virtual IQueryable<T> Table => _winWinDBContext.Set<T>();
-        public async Task Commit()
+        public async Task CommitAsync()
         {
            await  _winWinDBContext.SaveChangesAsync();
+        }
+        public void Commit()
+        {
+            _winWinDBContext.SaveChanges();
         }
     }
 }

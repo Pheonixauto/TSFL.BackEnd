@@ -11,7 +11,6 @@ namespace WinWin.Domain.Entities.Card
     {
         public string? Name { get; set; }
         public string? Description { get; set; }
-        public string PathContent { get; set; } = string.Empty;
-        public string PathImage { get; set; } = string.Empty;
+       
     }
 }
