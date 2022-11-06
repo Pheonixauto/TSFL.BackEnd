@@ -24,8 +24,20 @@ namespace WinWin.Service.Service.CardServices
             string query = $"Select * FROM Cards";
             //return await _genericRepository.GetAll();
             return await _genericDapperRepository.ExcuteSqlReturnList<Cards>(query);
-               
         }
+
+        public async Task<IEnumerable<Cards>> GetCardSRandoom()
+        {
+            string query = $"SELECT TOP 1 Id,Name,Description FROM Cards\r\nORDER BY NEWID()";
+            var cards = await _genericDapperRepository.ExcuteSqlReturnList<Cards>(query);
+            var cardDTOs = _mapper.Map<IEnumerable<CardDTO>>(cards);
+            foreach (var item in cardDTOs)
+            {
+                item.PathImage = item.Name + "\\" + item.Id;
+            }
+            return cardDTOs;
+        }
+
 
         public async Task AddCardAsync(Cards cards)
         {

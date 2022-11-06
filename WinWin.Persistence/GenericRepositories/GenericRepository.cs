@@ -25,6 +25,8 @@ namespace WinWin.Persistence.GenericRepositories
             return await _winWinDBContext.Set<T>().ToListAsync();
         }
 
+
+
         public async Task<T?> GetById(Guid id)
         {
             return await _winWinDBContext.Set<T>().FindAsync(id);
