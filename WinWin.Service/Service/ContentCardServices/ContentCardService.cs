@@ -23,7 +23,19 @@ namespace WinWin.Service.Service.ContentCardServices
                     return b;
                 }
                 return null;                      
+        }
+        public async Task<string?> GetCardContent(string fileName)
+        {
+            string path = _configuration.GetConnectionString("PathCardContent");
+            var filePath = path + fileName + ".txt";
+            if (File.Exists(filePath))
+            {
+                var b = await File.ReadAllTextAsync(filePath);
+                return b;
             }
+            return null;
         }
     }
+    
+}
 

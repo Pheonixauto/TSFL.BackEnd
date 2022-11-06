@@ -7,12 +7,11 @@ namespace WinWin.Prsetation.Api.Controllers
     [ApiController]
     public class ContentCardsController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
         private readonly IContentCardService _contentCardService;
 
-        public ContentCardsController(IConfiguration configuration, IContentCardService contentCardService)
+        public ContentCardsController(IContentCardService contentCardService)
         {
-            _configuration = configuration;
+ 
             _contentCardService = contentCardService;
         }
 
@@ -28,6 +27,22 @@ namespace WinWin.Prsetation.Api.Controllers
                     return NoContent();
                 }
                 return File(result, "image/jpg");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpGet]
+        [Route("content-image")]
+        public async Task<IActionResult> GetCardContent(string fileName)
+        {
+            try
+            {
+                var result = await _contentCardService.GetCardContent(fileName);
+                return Ok(result);
             }
             catch (Exception ex)
             {
