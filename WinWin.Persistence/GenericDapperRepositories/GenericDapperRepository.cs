@@ -13,7 +13,7 @@ namespace WinWin.Persistence.GenericDapperRepositories
         {
             connectionString = configuration.GetConnectionString("WinWinConnectionString");
         }
-        public async Task ExcuteNotReturn(string query, DynamicParameters parameters = null, IDbTransaction dbTransaction=null)
+        public async Task ExcuteNotReturn(string query, DynamicParameters? parameters = null, IDbTransaction? dbTransaction=null)
         {
             using (var dbConnection = new SqlConnection(connectionString))
             {
@@ -22,15 +22,15 @@ namespace WinWin.Persistence.GenericDapperRepositories
             
         }
 
-        public async Task<T> ExcuteReturn<T>(string query, DynamicParameters parameters = null, IDbTransaction dbTransaction = null)
+        public async Task<T> ExcuteReturn<T>(string query, DynamicParameters? parameters = null, IDbTransaction? dbTransaction = null)
         {
             using (var dbConnection = new SqlConnection(connectionString))
             {
-               return (T)Convert.ChangeType( await dbConnection.ExecuteScalarAsync<T>(query, parameters, dbTransaction, commandType: CommandType.StoredProcedure), typeof(T));
+               return (T)Convert.ChangeType( await dbConnection.ExecuteScalarAsync<T>(query, parameters, dbTransaction, commandType: CommandType.StoredProcedure), typeof(T))!;
             }
         }
 
-        public async Task<IEnumerable<T>> ExcuteSqlReturnList<T>(string query, DynamicParameters parameters = null, IDbTransaction dbTransaction = null)
+        public async Task<IEnumerable<T>> ExcuteSqlReturnList<T>(string query, DynamicParameters? parameters = null, IDbTransaction? dbTransaction = null)
         {
             using (var dbConnection = new SqlConnection(connectionString))
             {
@@ -38,7 +38,7 @@ namespace WinWin.Persistence.GenericDapperRepositories
             }
         }
 
-        public async Task<IEnumerable<T>> ExcuteStoreProduceReturnList<T>(string query, DynamicParameters parameters = null, IDbTransaction dbTransaction = null)
+        public async Task<IEnumerable<T>> ExcuteStoreProduceReturnList<T>(string query, DynamicParameters? parameters = null, IDbTransaction? dbTransaction = null)
         {
             using (var dbConnection = new SqlConnection(connectionString))
             {

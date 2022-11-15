@@ -50,5 +50,25 @@ namespace WinWin.Prsetation.Api.Controllers
             }
 
         }
+
+        [HttpGet]
+        [Route("zip")]
+        public async Task<IActionResult> GetZip(string fileName)
+        {
+            try
+            {
+                var result = await _contentCardService.GetZipContent(fileName);
+                if (result == null)
+                {
+                    return NoContent();
+                }
+                return File(result, "application/zip");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
     }
 }
