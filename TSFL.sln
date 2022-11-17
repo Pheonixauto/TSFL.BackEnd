@@ -19,17 +19,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TSFL.Api", "TSFL.Api\TSFL.Api.csproj", "{738FA8E7-35BD-4CD7-8766-0773B478DA54}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinWin.Api", "WinWin.Api\WinWin.Api.csproj", "{95B5FBE6-CC68-4A75-A7B1-87AB41E6C79C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinWin.Domain", "WinWin.Domain\WinWin.Domain.csproj", "{5CE318DC-8160-4B4E-807A-9CE414EC397D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinWin.Domain", "WinWin.Domain\WinWin.Domain.csproj", "{5CE318DC-8160-4B4E-807A-9CE414EC397D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinWin.Service", "WinWin.Service\WinWin.Service.csproj", "{64D42861-BA7B-4113-919D-C809B48C4740}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinWin.Service", "WinWin.Service\WinWin.Service.csproj", "{64D42861-BA7B-4113-919D-C809B48C4740}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinWin.Persistence", "WinWin.Persistence\WinWin.Persistence.csproj", "{C78A4A68-006F-4684-B381-C1918D3DE9A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinWin.Persistence", "WinWin.Persistence\WinWin.Persistence.csproj", "{C78A4A68-006F-4684-B381-C1918D3DE9A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinWin.Infrastructure", "WinWin.Infrastructure\WinWin.Infrastructure.csproj", "{8EB8C063-4409-4D54-82F1-625CB9DB956A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinWin.Infrastructure", "WinWin.Infrastructure\WinWin.Infrastructure.csproj", "{8EB8C063-4409-4D54-82F1-625CB9DB956A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinWin.Prsetation.Api", "WinWin.Prsetation.Api\WinWin.Prsetation.Api.csproj", "{B942D070-0729-452F-8570-FC1970E806E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinWin.Prsetation.Api", "WinWin.Prsetation.Api\WinWin.Prsetation.Api.csproj", "{B942D070-0729-452F-8570-FC1970E806E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,10 +55,6 @@ Global
 		{738FA8E7-35BD-4CD7-8766-0773B478DA54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{738FA8E7-35BD-4CD7-8766-0773B478DA54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{738FA8E7-35BD-4CD7-8766-0773B478DA54}.Release|Any CPU.Build.0 = Release|Any CPU
-		{95B5FBE6-CC68-4A75-A7B1-87AB41E6C79C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{95B5FBE6-CC68-4A75-A7B1-87AB41E6C79C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{95B5FBE6-CC68-4A75-A7B1-87AB41E6C79C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{95B5FBE6-CC68-4A75-A7B1-87AB41E6C79C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5CE318DC-8160-4B4E-807A-9CE414EC397D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5CE318DC-8160-4B4E-807A-9CE414EC397D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CE318DC-8160-4B4E-807A-9CE414EC397D}.Release|Any CPU.ActiveCfg = Release|Any CPU
