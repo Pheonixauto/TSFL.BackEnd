@@ -11,9 +11,13 @@ namespace WinWin.Persistence.IGenericRepositories
     {
 
         void Update(T entity);
-        void Delete(T entity);
+        //void Delete(T entity);
+        void Delete(Guid id);
+
         void DeleteByExpression(Expression<Func<T, bool>> expression);
         void Commit();
+
+        T GetTest(Guid id);
     
         Task<IEnumerable<T>> GetAll();
         Task<IEnumerable<T>> GetByExpression(Expression<Func<T, bool>> expression);

@@ -16,8 +16,8 @@ namespace WinWin.Service.Service.CardServices
         public CardService(IGenericRepository<Cards> genericRepository, IGenericDapperRepository genericDapperRepository, IMapper mapper)
         {
             _genericRepository = genericRepository;
-             _genericDapperRepository = genericDapperRepository;
-           _mapper = mapper;
+            _genericDapperRepository = genericDapperRepository;
+            _mapper = mapper;
         }
         public async Task<IEnumerable<Cards>> GetAllCardsAsync()
         {
@@ -41,21 +41,32 @@ namespace WinWin.Service.Service.CardServices
 
         public async Task AddCardAsync(Cards cards)
         {
-           await _genericRepository.Insert(cards);
-           await _genericRepository.CommitAsync();
+            await _genericRepository.Insert(cards);
+            await _genericRepository.CommitAsync();
         }
 
         public async Task<Cards?> GetCardById(Guid id)
         {
-            var cardDTO =  _mapper.Map<CardDTO>(await _genericRepository.GetById(id));
+            var cardDTO = _mapper.Map<CardDTO>(await _genericRepository.GetById(id));
             cardDTO.PathImage = cardDTO.Name + "\\" + cardDTO.Id;
             return cardDTO;
         }
 
-        public  void UpdateCard(Cards cards)
-        {        
-             _genericRepository.Update(cards);
-             _genericRepository.Commit();
+        public Cards GetTest(Guid id)
+        {
+            return _genericRepository.GetTest(id);
+        }
+
+        public void UpdateCard(Cards cards)
+        {
+            _genericRepository.Update(cards);
+            _genericRepository.Commit();
+        }
+
+        public void DeleteCard(Guid id)
+        {
+            _genericRepository.Delete(id);
+            _genericRepository.Commit();
         }
     }
 }

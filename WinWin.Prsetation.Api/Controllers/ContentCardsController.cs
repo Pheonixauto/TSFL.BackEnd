@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System.Net.Sockets;
 using WinWin.Service.IService.IContentCardServices;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WinWin.Prsetation.Api.Controllers
 {
@@ -16,7 +19,7 @@ namespace WinWin.Prsetation.Api.Controllers
         }
 
         [HttpGet]
-        [Route("Image")]
+        [Route("image")]
         public async Task<IActionResult> GetCardImage(string fileName)
         {
             try
@@ -27,6 +30,26 @@ namespace WinWin.Prsetation.Api.Controllers
                     return NoContent();
                 }
                 return File(result, "image/jpg");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpGet]
+        [Route("txt")]
+        public async Task<IActionResult> GetCardImageTxt(string fileName)
+        {
+            try
+            {
+                var result = await _contentCardService.GetCardContentTxt(fileName);
+                if (result == null)
+                {
+                    return NoContent();
+                }
+                return File(result, "text/txt");
             }
             catch (Exception ex)
             {

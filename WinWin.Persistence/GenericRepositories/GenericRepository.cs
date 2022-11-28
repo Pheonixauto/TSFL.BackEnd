@@ -30,6 +30,7 @@ namespace WinWin.Persistence.GenericRepositories
         public async Task<T?> GetById(Guid id)
         {
             return await _winWinDBContext.Set<T>().FindAsync(id);
+
         }
 
         public async Task<IEnumerable<T>> GetByExpression(Expression<Func<T, bool>> expression)
@@ -40,6 +41,15 @@ namespace WinWin.Persistence.GenericRepositories
         {
             EntityEntry entityEntry = _winWinDBContext.Entry<T>(entity);
             entityEntry.State = EntityState.Deleted;
+        }
+        public void Delete(Guid id)
+        {
+            var entity = _winWinDBContext.Set<T>().Find(id);
+            if(entity != null)
+            {
+                EntityEntry entityEntry = _winWinDBContext.Entry<T>(entity);
+                entityEntry.State = EntityState.Deleted;
+            }        
         }
 
         public void DeleteByExpression(Expression<Func<T, bool>> expression)
@@ -53,7 +63,7 @@ namespace WinWin.Persistence.GenericRepositories
 
         public async Task Insert(T entity)
         {
-           await _winWinDBContext.Set<T>().AddAsync(entity);
+          await _winWinDBContext.Set<T>().AddAsync(entity);
         }
 
         public async Task InsertRange(IEnumerable<T> entities)
@@ -75,6 +85,12 @@ namespace WinWin.Persistence.GenericRepositories
         public void Commit()
         {
             _winWinDBContext.SaveChanges();
+        }
+
+        public T GetTest(Guid id)
+        {
+            var x = _winWinDBContext.Set<T>().FromSqlRaw("SELECT * FROM Cards WHERE Id = {0}", id).FirstOrDefault();
+            return x;
         }
     }
 }

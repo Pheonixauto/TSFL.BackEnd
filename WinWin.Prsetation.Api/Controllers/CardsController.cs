@@ -39,13 +39,21 @@ namespace WinWin.Prsetation.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("get-card-test")]
+        public IActionResult GetCardTest(Guid id)
+        {
+            var result = _cardService.GetTest(id);
+            return Ok(result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddCard([FromBody] Cards cards)
         {
             try
             {
                 await _cardService.AddCardAsync(cards);
-                return Ok("success");
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -67,6 +75,22 @@ namespace WinWin.Prsetation.Api.Controllers
                 return BadRequest(ex.Message);
             }
        
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteCard(Guid id)
+        {
+            try
+            {
+                _cardService.DeleteCard(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+
+            }
         }
 
     }

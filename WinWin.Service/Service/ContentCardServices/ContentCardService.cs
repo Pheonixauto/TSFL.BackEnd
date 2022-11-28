@@ -25,7 +25,22 @@ namespace WinWin.Service.Service.ContentCardServices
                 }
                 return null;                      
         }
-        public async Task<CardContent?> GetCardContent(string fileName)
+
+        public async Task<byte[]?> GetCardContentTxt(string fileName)
+        {
+            string path = _configuration.GetConnectionString("PathCardContent");
+
+            var filePath = path + fileName + ".txt";
+            if (File.Exists(filePath))
+            {
+                byte[] b = await File.ReadAllBytesAsync(filePath);
+                return b;
+            }
+            return null;
+
+        }
+
+            public async Task<CardContent?> GetCardContent(string fileName)
         {
             CardContent cardContent = new CardContent();
             string path = _configuration.GetConnectionString("PathCardContent");
