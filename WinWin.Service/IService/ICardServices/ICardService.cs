@@ -10,6 +10,7 @@ namespace WinWin.Service.IService.ICardServices
         Task<IEnumerable<Cards>> GetCardSRandoom();
         void UpdateCard(Cards cards);
         void DeleteCard(Guid id);
-        Cards GetTest(Guid id);
+        IEnumerable<Cards> GetTest(Guid id);
+        Task<IEnumerable<Cards>> GetAllCard();
     }
 }

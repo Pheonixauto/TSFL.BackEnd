@@ -1,11 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using WinWin.Persistence.DataBaseContext;
 using WinWin.Persistence.IGenericRepositories;
 
@@ -17,7 +13,7 @@ namespace WinWin.Persistence.GenericRepositories
 
         public GenericRepository(WinWinDBContext winWinDBContext)
         {
-           _winWinDBContext = winWinDBContext;
+            _winWinDBContext = winWinDBContext;
         }
 
         public async Task<IEnumerable<T>> GetAll()
@@ -45,11 +41,11 @@ namespace WinWin.Persistence.GenericRepositories
         public void Delete(Guid id)
         {
             var entity = _winWinDBContext.Set<T>().Find(id);
-            if(entity != null)
+            if (entity != null)
             {
                 EntityEntry entityEntry = _winWinDBContext.Entry<T>(entity);
                 entityEntry.State = EntityState.Deleted;
-            }        
+            }
         }
 
         public void DeleteByExpression(Expression<Func<T, bool>> expression)
@@ -63,12 +59,12 @@ namespace WinWin.Persistence.GenericRepositories
 
         public async Task Insert(T entity)
         {
-          await _winWinDBContext.Set<T>().AddAsync(entity);
+            await _winWinDBContext.Set<T>().AddAsync(entity);
         }
 
         public async Task InsertRange(IEnumerable<T> entities)
         {
-           await  _winWinDBContext.Set<T>().AddRangeAsync(entities);
+            await _winWinDBContext.Set<T>().AddRangeAsync(entities);
 
         }
 
@@ -80,17 +76,22 @@ namespace WinWin.Persistence.GenericRepositories
         public virtual IQueryable<T> Table => _winWinDBContext.Set<T>();
         public async Task CommitAsync()
         {
-           await  _winWinDBContext.SaveChangesAsync();
+            await _winWinDBContext.SaveChangesAsync();
         }
         public void Commit()
         {
             _winWinDBContext.SaveChanges();
         }
 
-        public T GetTest(Guid id)
+        public IEnumerable<T> GetTest(string sql, SqlParameter[] parameters)
         {
-            var x = _winWinDBContext.Set<T>().FromSqlRaw("SELECT * FROM Cards WHERE Id = {0}", id).FirstOrDefault();
-            return x;
+            return _winWinDBContext.Set<T>().FromSqlRaw(sql,parameters).ToList();      
+        }
+
+        public async Task<IEnumerable<T>> GetAll1(string sql)
+        {
+            return await _winWinDBContext.Set<T>().FromSqlRaw(sql).ToListAsync();
+
         }
     }
 }

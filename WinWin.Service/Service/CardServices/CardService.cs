@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Data.SqlClient;
 using WinWin.Domain.Entities.Card;
 using WinWin.Domain.Model;
 using WinWin.Persistence.IGenericDapperRepositories;
@@ -24,6 +25,11 @@ namespace WinWin.Service.Service.CardServices
             string query = $"Select * FROM Cards";
             //return await _genericRepository.GetAll();
             return await _genericDapperRepository.ExcuteSqlReturnList<Cards>(query);
+        }
+
+        public async Task<IEnumerable<Cards>> GetAllCard()
+        {
+            return await _genericRepository.GetAll1($"SP_GetAllCard");
         }
 
         public async Task<IEnumerable<Cards>> GetCardSRandoom()
@@ -52,10 +58,15 @@ namespace WinWin.Service.Service.CardServices
             return cardDTO;
         }
 
-        public Cards GetTest(Guid id)
+        public IEnumerable<Cards> GetTest(Guid id)
         {
-            return _genericRepository.GetTest(id);
+            var para = new SqlParameter[]
+            {
+                new SqlParameter{  ParameterName = "@Id",Value=id,}
+            };
+            return _genericRepository.GetTest($"SP_GET_CARD_BY_ID @Id", para);
         }
+
 
         public void UpdateCard(Cards cards)
         {

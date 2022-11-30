@@ -24,6 +24,14 @@ namespace WinWin.Prsetation.Api.Controllers
         }
 
         [HttpGet]
+        [Route("get-all-card")]
+        public async Task<IActionResult> GetAllCard()
+        {
+            var cards = await _cardService.GetAllCard();
+            return Ok(cards);
+        }
+
+        [HttpGet]
         [Route("get-card-randoom")]
         public async Task<IActionResult> GetCardRandoom()
         {
