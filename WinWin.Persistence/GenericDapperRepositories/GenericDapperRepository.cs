@@ -8,7 +8,7 @@ namespace WinWin.Persistence.GenericDapperRepositories
 {
     public class GenericDapperRepository : IGenericDapperRepository
     {
-        private readonly string connectionString = string.Empty;
+        private readonly string connectionString = string.Empty; 
         public GenericDapperRepository(IConfiguration configuration)
         {
             connectionString = configuration.GetConnectionString("WinWinConnectionString");
