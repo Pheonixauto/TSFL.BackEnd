@@ -33,6 +33,12 @@ namespace WinWin.Persistence.GenericRepositories
         {
             return await _winWinDBContext.Set<T>().Where(expression).ToListAsync();
         }
+
+        public async Task<T?> GetSingleByConditionAsync(Expression<Func<T, bool>> expression)
+        {
+            return await _winWinDBContext.Set<T>().FirstOrDefaultAsync(expression);
+        }
+
         public void Delete(T entity)
         {
             EntityEntry entityEntry = _winWinDBContext.Entry<T>(entity);

@@ -29,5 +29,6 @@ namespace WinWin.Persistence.IGenericRepositories
         Task Insert(T entity);
         Task InsertRange(IEnumerable<T> entities);
         Task CommitAsync();
+        Task<T?> GetSingleByConditionAsync(Expression<Func<T, bool>> expression);
     }
 }

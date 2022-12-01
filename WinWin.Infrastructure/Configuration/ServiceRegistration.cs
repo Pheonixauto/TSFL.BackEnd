@@ -6,11 +6,14 @@ using WinWin.Persistence.GenericDapperRepositories;
 using WinWin.Persistence.GenericRepositories;
 using WinWin.Persistence.IGenericDapperRepositories;
 using WinWin.Persistence.IGenericRepositories;
+using WinWin.Service.AuthenticationService;
 using WinWin.Service.AutoMapperProfiles;
 using WinWin.Service.IService.ICardServices;
 using WinWin.Service.IService.IContentCardServices;
+using WinWin.Service.IService.IUserServices;
 using WinWin.Service.Service.CardServices;
 using WinWin.Service.Service.ContentCardServices;
+using WinWin.Service.Service.UserServices;
 
 namespace WinWin.Infrastructure.Configuration
 {
@@ -20,6 +23,8 @@ namespace WinWin.Infrastructure.Configuration
         {
             services.AddDbContext<WinWinDBContext>(option => option.UseSqlServer(configuration.GetConnectionString("WinWinConnectionString"),
                         b => b.MigrationsAssembly(typeof(WinWinDBContext).Assembly.FullName)), ServiceLifetime.Transient);
+
+            services.AddTokenBear(configuration);
 
             services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
             return services;
@@ -32,6 +37,8 @@ namespace WinWin.Infrastructure.Configuration
 
             services.AddScoped<ICardService, CardService>();
             services.AddScoped<IContentCardService, ContentCardService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITokenHandler, TokenHandler>();
 
             return services;
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinWin.Domain.Entities.Card;
+using WinWin.Domain.Entity.User;
 
 namespace WinWin.Persistence.DataBaseContext
 {
@@ -16,5 +17,6 @@ namespace WinWin.Persistence.DataBaseContext
         }
 
        public DbSet<Cards> Cards { get; set; }
+       public DbSet<Users> Users { get; set; }
     }
 }
