@@ -20,5 +20,10 @@ namespace WinWin.Service.Service.UserServices
         {
             return await _genericRepository.GetSingleByConditionAsync(x => x.UserName!.Equals(userName) && x.PassWord!.Equals(password));
         }
+
+        public  async Task<Users?> FindByUserName(string userName)
+        {
+            return await _genericRepository.GetSingleByConditionAsync(x => x.UserName == userName);
+        }
     }
 }

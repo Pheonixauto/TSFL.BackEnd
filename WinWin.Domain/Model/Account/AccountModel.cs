@@ -11,6 +11,7 @@ namespace WinWin.Domain.Model.Account
     {
  
         public string? UserName { get; set; }
+        public string? DisplayName { get; set; }
         public string? PassWord { get; set; }
     }
 }

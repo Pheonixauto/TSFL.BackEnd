@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinWin.Service.AuthenticationService;
 
 namespace WinWin.Infrastructure.Configuration
 {
@@ -14,7 +15,13 @@ namespace WinWin.Infrastructure.Configuration
     {
         public static void AddTokenBear(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAuthentication().AddJwtBearer(options =>
+            services.AddAuthentication(options =>
+            {
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
             {
                 options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -32,7 +39,8 @@ namespace WinWin.Infrastructure.Configuration
                 {
                     OnTokenValidated = context=>
                     {
-                        return Task.CompletedTask;
+                        var tokenValidate = context.HttpContext.RequestServices.GetRequiredService<ITokenHandler>();
+                        return  tokenValidate.ValidateToken(context);
                     },
                     OnAuthenticationFailed = context =>
                     {

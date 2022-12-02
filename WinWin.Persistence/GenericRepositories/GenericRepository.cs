@@ -97,7 +97,6 @@ namespace WinWin.Persistence.GenericRepositories
         public async Task<IEnumerable<T>> GetAll1(string sql)
         {
             return await _winWinDBContext.Set<T>().FromSqlRaw(sql).ToListAsync();
-
         }
     }
 }

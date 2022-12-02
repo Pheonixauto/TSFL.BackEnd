@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WinWin.Persistence.DataBaseContext;
 
@@ -11,9 +12,10 @@ using WinWin.Persistence.DataBaseContext;
 namespace WinWin.Persistence.Migrations
 {
     [DbContext(typeof(WinWinDBContext))]
-    partial class WinWinDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221202144256_addTokens")]
+    partial class addTokens
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

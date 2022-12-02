@@ -10,5 +10,6 @@ namespace WinWin.Service.IService.IUserServices
     public interface IUserService
     {
         Task<Users?> CheckLogin(string userName, string password);
+        Task<Users?> FindByUserName(string userName);
     }
 }

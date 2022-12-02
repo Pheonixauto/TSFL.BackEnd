@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WinWin.Domain.Entities.Card;
 using WinWin.Service.IService.ICardServices;
 
 namespace WinWin.Prsetation.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CardsController : ControllerBase
