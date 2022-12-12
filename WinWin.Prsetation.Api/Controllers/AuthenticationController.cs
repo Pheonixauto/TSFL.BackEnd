@@ -40,7 +40,8 @@ namespace WinWin.Prsetation.Api.Controllers
             (string accessToken, DateTime expiredAccessToken) = await _tokenHandler.CreateToken(result);
             (string refreshToken, DateTime expiredrefreshToken) = await _tokenHandler.CreateRefreshToken(result);
 
-            await _tokens.SaveToken(new Domain.Entity.Token.Tokens {
+            await _tokens.SaveToken(new Domain.Entity.Token.Tokens
+            {
                 AccessToken = accessToken,
                 ExpiredDateAccessToken = expiredAccessToken,
                 RefreshToken = refreshToken,

@@ -5,7 +5,7 @@ using WinWin.Service.IService.ICardServices;
 
 namespace WinWin.Prsetation.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CardsController : ControllerBase

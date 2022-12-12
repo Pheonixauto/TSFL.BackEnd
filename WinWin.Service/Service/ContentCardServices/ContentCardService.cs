@@ -65,6 +65,20 @@ namespace WinWin.Service.Service.ContentCardServices
             }
             return null;
         }
+
+        public async Task<byte[]?> GetVideo(string fileName)
+        {
+            string path = _configuration.GetConnectionString("PathCardContent");
+            fileName = "Freedom\\6b036a05-203f-461c-f5bb-08dabfac97f0";
+
+            var filePath = path + fileName + ".mp4";
+            if (File.Exists(filePath))
+            {
+                byte[] b = await File.ReadAllBytesAsync(filePath);
+                return b;
+            }
+            return null;
+        }
     }
     
 }

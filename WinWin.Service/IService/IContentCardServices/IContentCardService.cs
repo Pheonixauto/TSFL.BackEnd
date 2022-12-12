@@ -12,6 +12,7 @@ namespace WinWin.Service.IService.IContentCardServices
         Task<CardContent> GetCardContent(string fileName);
         Task<byte[]?> GetCardContentTxt(string fileName);
         Task<byte[]?> GetImage(string fileName);
+        Task<byte[]?> GetVideo(string fileName);
         Task<byte[]?> GetZipContent(string fileName);
     }
 }
